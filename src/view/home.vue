@@ -1,32 +1,47 @@
 <template>
-    <div>
+  <div class="wrap">
+    <el-container>
+      <Aside :list="menuList"></Aside>
+      <el-container>
         <Header></Header>
-    </div>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+        <el-footer>Footer</el-footer>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <script>
-    import Header from '../components/header/index.vue'
-    export default {
-        name: "home",
-        components:{
-            Header
-        },
-        data() {
-            return {
-            }
-        },
-        async created() {
-            await this.getMenuList()
-        },
-        methods: {
-            async getMenuList() {
-                let res = await this.$api.getMenuList()
-                console.log(res)
-            }
-        },
-    }
+import Header from "../components/header/index.vue";
+import Aside from "../components/aside/index.vue";
+
+export default {
+  name: "home",
+  components: {
+    Header,
+    Aside,
+  },
+  data() {
+    return {
+      menuList: [],
+    };
+  },
+  async created() {},
+  mounted() {
+    let menuList = JSON.parse(window.localStorage.getItem("menuList"));
+    this.menuList = menuList;
+    console.log("mounted...");
+  },
+  methods: {},
+};
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.wrap {
+  position: relative;
+  height: 100vh;
+  background-color: #fff;
+}
 </style>

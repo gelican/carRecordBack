@@ -16,12 +16,21 @@ axios.interceptors.response.use(res => {
     if (res.status === 200) {
         if (res.data.code === 200) {
             return res.data.data
+        } else if ([50012, 50008].indexOf(res.data.code) >= 0) {
+            Message({
+                type: 'error',
+                message: res.data.msg
+            });
+            router.replace({
+                path: '/login'
+            })
+            return Promise.reject()
         } else {
             Message({
                 type: 'error',
                 message: res.data.msg
             });
-            return
+            return Promise.reject()
         }
     } else {
         Notify({
@@ -29,7 +38,7 @@ axios.interceptors.response.use(res => {
             message: '请求数据报错，请联系管理员'
         });
     }
-    
+
 }, error => {
     return Promise.reject(error)
 })

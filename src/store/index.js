@@ -67,5 +67,17 @@ export default new Vuex.Store({
             state.userData.token = ''
             localStorage.removeItem('userData')
         },
+        // 更新缓存用户信息
+        getStorageUserData(state) {
+            let storage = JSON.parse(window.localStorage.getItem('userData'))
+            state.userData.userId = storage.id
+            state.userData.userName = storage.userName
+            state.userData.deptname = storage.deptname
+            state.userData.name = storage.name
+            state.userData.code = storage.code
+            state.userData.status = storage.status
+            state.userData.isAdmin = storage.isAdmin
+            state.userData.token = storage.token
+        }
     },
 })

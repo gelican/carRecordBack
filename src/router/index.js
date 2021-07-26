@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
+        name: 'index',
         component: () => import('@/view/home.vue'),
         children: [
         ],
@@ -13,6 +14,12 @@ const routes = [
     {
         path: '/login',
         component: () => import('@/view/login.vue'),
+        children: [
+        ],
+    },
+    {
+        path: '/404',
+        component: () => import('@/view/404.vue'),
         children: [
         ],
     },
