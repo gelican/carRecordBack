@@ -13,17 +13,18 @@ export default {
   watch: {
     $route(to, from) {
       console.log(to, from);
-      if (!routeExist(to.path)) {
+      /* if (!routeExist(to.path)) {
         this.$router.replace({
           path: "/404",
         });
-      }
+      } */
     },
   },
   created() {
     this.$store.commit("getStorageUserData");
     let menuList = JSON.parse(window.localStorage.getItem("menuList"));
     this.recurs(menuList);
+    console.log(this)
     this.$router.addRoutes([
       {
         path: "/",
@@ -31,11 +32,11 @@ export default {
         children: menuList,
       },
     ]);
-    if (!routeExist(this.$route.path)) {
+    /* if (!routeExist(this.$route.path)) {
       this.$router.replace({
         path: "/404",
       });
-    }
+    } */
   },
   methods: {
     recurs(list) {
