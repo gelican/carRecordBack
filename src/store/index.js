@@ -69,7 +69,9 @@ export default new Vuex.Store({
         },
         // 更新缓存用户信息
         getStorageUserData(state) {
-            let storage = JSON.parse(window.localStorage.getItem('userData'))
+            let storage = window.localStorage.getItem('userData')
+            if (!storage) return
+            storage = JSON.parse(storage)
             state.userData.userId = storage.id
             state.userData.userName = storage.userName
             state.userData.deptname = storage.deptname

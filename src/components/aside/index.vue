@@ -2,12 +2,14 @@
   <div>
     <el-aside width="200px">
       <el-menu
-        default-active="2"
+        :default-active="active"
+        :default-openeds="actives"
         class="el-menu-vertical-demo"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
-        :router="true"
+        :unique-opened="true"
+        @select="menuSelect"
       >
         <menuItem :list="list"></menuItem>
       </el-menu>
@@ -31,12 +33,32 @@ export default {
   },
   data() {
     return {
+      active: '',
       menuList: [],
     };
   },
-  async created() {
+  watch: {
+    $route(to) {
+      this.active = to.path.substr(1)
+    },
+  },
+  created() {
+    this.active = this.$route.path.substr(1)
   },
   methods: {
+    // 切换菜单时
+    menuSelect(index, indexPath) {
+      this.$router.push({
+        path: '/' + index
+      }).catch(err => {
+        // 没有对应文件的路由
+        console.log(err)
+        this.$router.push({
+          path: '/404'
+        })
+      })
+    },
+    setActive() {}
   },
 };
 </script>

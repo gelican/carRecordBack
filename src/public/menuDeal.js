@@ -17,7 +17,7 @@ export default (menuList = [], addRoutes = false) => {
     }
     // 遍历组合成嵌套的对象
     menuList.rows.forEach(row => {
-        let parentIds = []
+        let parentIds = [] // 祖先节点的id集合
         if (row.parentId !== 0 && returnObj[row.parentId]) {
             parentIds.push(...returnObj[row.parentId].parentIds, row.parentId)
         } else {
@@ -35,6 +35,7 @@ export default (menuList = [], addRoutes = false) => {
             childObj: {},
         }
     });
+    // 遍历所有节点，挂载到父级下
     for (let key in returnObj) {
         if (key === '0') continue
         let row = returnObj[key]
@@ -49,11 +50,11 @@ export default (menuList = [], addRoutes = false) => {
         })
         parent.childObj[row.id] = JSON.parse(JSON.stringify(row))
     }
-    returnObj = returnObj['0'].childObj
+    returnObj = returnObj['0'].childObj // 取根节点
     let array = recurs(returnObj)
     return array
 };
-
+// 对象格式转换为数组
 function recurs(obj) {
     let _list = []
     for (let key in obj) {

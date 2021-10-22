@@ -8,6 +8,7 @@
 
 <script>
 import routeExist from "@/public/routeExist";
+import menuAddRoute from "./public/menuAddRoute";
 export default {
   name: "App",
   watch: {
@@ -21,16 +22,12 @@ export default {
     },
   },
   created() {
+    window.vm = this
     this.$store.commit("getStorageUserData");
-    let menuList = JSON.parse(window.localStorage.getItem("menuList"));
-    this.recurs(menuList);
-    this.$router.addRoutes([
-      {
-        path: "/",
-        component: () => import("@/view/home.vue"),
-        children: menuList,
-      },
-    ]);
+    let menuList = window.localStorage.getItem("menuList")
+    if (!menuList) return
+    menuList = JSON.parse(menuList)
+    menuAddRoute(menuList)
     if (!routeExist(this.$route.path)) {
       this.$router.replace({
         path: "/404",
@@ -38,12 +35,6 @@ export default {
     }
   },
   methods: {
-    recurs(list) {
-      for (let row of list) {
-        if (row.children) this.recurs(row.children);
-        row.component = () => import(`@/view/${row.path}/index.vue`);
-      }
-    },
   },
 };
 </script>

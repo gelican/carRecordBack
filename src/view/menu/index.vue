@@ -69,7 +69,7 @@
             :disabled="['check'].indexOf(dialogType) >= 0"
           ></el-input>
         </el-form-item>
-        <el-form-item label="路径">
+        <el-form-item label="路径(最子级需填 例:resource/log)">
           <el-input
             v-model="form.path"
             :disabled="['check'].indexOf(dialogType) >= 0"
@@ -120,7 +120,7 @@ export default {
       window.location.reload();
     },
     async deal(flag, index, row) {
-      console.log(flag, index, row);
+      // console.log(flag, index, row);
       switch (flag) {
         case "check":
         case "edit":
@@ -180,7 +180,7 @@ export default {
     async getMenuList() {
       let res = await this.$api.getMenuList();
       this.menuList = menuDeal(res);
-      console.log(this.menuList);
+      // console.log(this.menuList);
       window.localStorage.setItem("menuList", JSON.stringify(this.menuList));
     },
   },

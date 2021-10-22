@@ -12,9 +12,7 @@
         </template>
         <menuItem :list="row.children"></menuItem>
       </el-submenu>
-      <el-menu-item v-else :key="row.id" :index="row.path">{{
-        row.title
-      }}</el-menu-item>
+      <el-menu-item v-else :key="row.id" :index="row.path">{{row.title}}/{{row.path}}</el-menu-item>
     </template>
   </div>
 </template>

@@ -29,10 +29,13 @@ export default {
     };
   },
   async created() {},
-  mounted() {
+  activated() {
     let menuList = JSON.parse(window.localStorage.getItem("menuList"));
     this.menuList = menuList;
-    console.log("mounted...");
+    console.log("Home activated...");
+  },
+  mounted() {
+    console.log('home: mounted...')
   },
   methods: {},
 };

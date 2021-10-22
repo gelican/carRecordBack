@@ -26,6 +26,7 @@
 
 <script>
 import menuDeal from "@/public/menuDeal";
+import menuAddRoute from "../public/menuAddRoute";
 
 let that;
 export default {
@@ -81,6 +82,7 @@ export default {
       let res = await this.$api.getMenuList();
       let menuList = menuDeal(res);
       window.localStorage.setItem("menuList", JSON.stringify(menuList));
+      menuAddRoute(menuList)
     },
   },
 };
