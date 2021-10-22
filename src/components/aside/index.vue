@@ -3,7 +3,6 @@
     <el-aside width="200px">
       <el-menu
         :default-active="active"
-        :default-openeds="actives"
         class="el-menu-vertical-demo"
         background-color="#545c64"
         text-color="#fff"

@@ -6,7 +6,6 @@
       style="width: 100%;margin-bottom: 20px;"
       row-key="id"
       :border="false"
-      default-expand-all
       stripe
     >
       <el-table-column prop="title" label="菜单名"></el-table-column>
@@ -42,6 +41,7 @@
       </el-table-column>
     </el-table>
     <el-dialog
+      :modal-append-to-body="false"
       :title="types[dialogType]"
       :visible.sync="dialogShow"
       :close-on-click-modal="false"
@@ -92,7 +92,7 @@
 <script>
 import menuDeal from "@/public/menuDeal";
 export default {
-  name: "menu",
+  name: "page-menu",
   data() {
     return {
       menuList: [],

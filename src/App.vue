@@ -14,11 +14,11 @@ export default {
   watch: {
     $route(to, from) {
       console.log(to, from);
-      if (!routeExist(to.path)) {
+      /* if (!routeExist(to.path)) {
         this.$router.replace({
           path: "/404",
         });
-      }
+      } */
     },
   },
   created() {
@@ -29,9 +29,16 @@ export default {
     menuList = JSON.parse(menuList)
     menuAddRoute(menuList)
     if (!routeExist(this.$route.path)) {
-      this.$router.replace({
-        path: "/404",
-      });
+      let menuList = JSON.parse(window.localStorage.getItem("menuList"));
+      this.recurs(menuList);
+      console.log(this)
+      this.$router.addRoutes([
+        {
+          path: "/",
+          component: () => import("@/view/home.vue"),
+          children: menuList,
+        },
+      ]);
     }
   },
   methods: {

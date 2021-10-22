@@ -31,6 +31,12 @@ export default {
   async created() {},
   activated() {
     let menuList = JSON.parse(window.localStorage.getItem("menuList"));
+    if (!menuList) {
+      this.$router.replace({
+        path: '/login'
+      })
+      return
+    }
     this.menuList = menuList;
     console.log("Home activated...");
   },
