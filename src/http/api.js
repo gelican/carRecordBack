@@ -8,6 +8,9 @@ const user = {
     login(data) {
         return request(`/user/login`, 'post', data)
     },
+    getUserList(data) {
+        return request('/user/list', 'post', data)
+    }
 }
 
 /**

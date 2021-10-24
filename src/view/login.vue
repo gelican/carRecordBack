@@ -6,7 +6,7 @@
         <div class="title">用户登录</div>
         <div class="input">
           <div class="icon iconfont icon-user"></div>
-          <input class="content" v-model="name" placeholder="账号" />
+          <input class="content" v-model="name" @keydown.13="login" placeholder="账号" />
         </div>
         <div class="input">
           <div class="icon iconfont icon-unlock"></div>
@@ -15,6 +15,7 @@
             v-model="password"
             placeholder="密码"
             type="password"
+            @keydown.13="login"
           />
         </div>
         <div class="button" v-if="!loading" @click="login">登 录</div>
@@ -28,7 +29,6 @@
 import menuDeal from "@/public/menuDeal";
 import menuAddRoute from "../public/menuAddRoute";
 
-let that;
 export default {
   name: "login",
   data() {
@@ -41,7 +41,6 @@ export default {
     };
   },
   beforeCreate() {
-    that = this;
   },
   methods: {
     async login() {
