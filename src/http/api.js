@@ -10,7 +10,19 @@ const user = {
     },
     getUserList(data) {
         return request('/user/list', 'post', data)
-    }
+    },
+    getUserInfo(id) {
+        return request(`/user/info/${id}`, 'get')
+    },
+    addUser(data) {
+        return request(`/user/add`, 'post', data)
+    },
+    editUser(data) {
+        return request(`/user/edit`, 'post', data)
+    },
+    deleteUser(id) {
+        return request(`/user/delete/${id}`, 'get')
+    },
 }
 
 /**
